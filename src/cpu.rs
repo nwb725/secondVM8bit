@@ -16,6 +16,7 @@ pub mod cpu_state {
 
     impl CpuState {
         pub fn new_state() -> Self {
+            println!("GITTEST");
             Self {
                 registers: [0; NUM_REGS],
                 pc:        0,
