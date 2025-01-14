@@ -1,0 +1,23 @@
+_START:
+    ADDI r4 9      ; r4 holds n (the Fibonacci number we want)
+    ADDI r5 32     ; Address of HLT
+    ADDI r6 1      ; Set r6 to 1 (used for the return value of fib)
+    CALL _FIB      ; Call the Fibonacci function
+    HLT             ; Halt the program
+
+_FIB:
+    ; Base case: if n <= 1, return n
+    SUB r4 r6      ; Decrement n by 1 (r4 = n - 1)
+    JMPZ r5 r4     ; If n == 0 (previously r4), return 0 (to HLT address)
+    ADDI r4 1      ; If n was not 0, restore n to original value
+    ADDI r4 1      ; Decrement n by 1 again to call fib(n - 1)
+    CALL _FIB      ; Call fib(n - 1)
+    MOV r2 r1      ; Move the result of fib(n - 1) into r2
+
+    ; Recursive call for fib(n - 2)
+    SUB r4 r6      ; Decrement n by 1 (r4 = n - 2)
+    CALL _FIB      ; Call fib(n - 2)
+    
+    ; Add the results of fib(n - 1) and fib(n - 2)
+    ADD r1 r2      ; r1 = fib(n - 1) + fib(n - 2)
+    RET            ; Return to caller

@@ -1,0 +1,25 @@
+_START:
+ADDI r1 0       ; Fib(0)
+ADDI r2 1       ; Fib(1)
+
+ADDI r4 5       ; r4 holds the n-1 value of the fib.
+ADDI r6 1       ; Subtracting 1 each itteration.
+
+ADDI r7 18      ; Address of fib function start.
+ADDI r5 32      ; Adress of HLT.
+CALL _FIB       ; Calls fib.
+HLT             
+
+_FIB: 
+ADD r1 r2       ; r1 = fib[n-2] + fib[n-1] 
+MOV r3 r1       ; r3 = fib[n]
+MOV r1 r2       ; r1 = fib[n-1]
+MOV r2 r3       ; r2 = fib[n]
+
+SUB r4 r6
+JMPZ r5 r4      ; Jumps to RET if r4 is zero.
+JMPZ r7 r0      ; Always jumps to fib.
+RET
+
+
+
